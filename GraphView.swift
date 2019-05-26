@@ -906,9 +906,9 @@ class RenderCycle {
         #if os(iOS)
             displayLink = CADisplayLink(target: self, selector: #selector(renderCycle))
             if #available(iOS 10, *) {
-                displayLink?.preferredFramesPerSecond = 30
+//                displayLink?.preferredFramesPerSecond = 30
             } else {
-                displayLink?.frameInterval = 2
+//                displayLink?.frameInterval = 2
             }
             displayLink?.add(to: .main, forMode: .commonModes)
         #elseif os(OSX)
@@ -1086,6 +1086,7 @@ fileprivate class _MetalGraphView: View, RenderCycleObserver {
         metalLayer.device = device
         metalLayer.pixelFormat = .bgra8Unorm
         metalLayer.framebufferOnly = true
+        metalLayer.allowsEdgeAntialiasing = true
         
         commandQueue = device?.makeCommandQueue()
         setupBuffers()
